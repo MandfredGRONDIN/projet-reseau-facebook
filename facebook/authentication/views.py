@@ -9,6 +9,8 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from post.models import Post
 from post.forms import PostForm
+from friendship.models import Friendship
+from django.db.models import Q
 
 # Home View
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -18,15 +20,48 @@ class HomeView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(user=self.request.user).order_by('-created_at')
-        context['form'] = PostForm()  
+
+        # Récupérer les posts de l'utilisateur connecté
+        user_posts = Post.objects.filter(user=self.request.user).order_by('-created_at')
+
+        # Récupérer les amis de l'utilisateur
+        # On suppose que le modèle Friendship a une relation "user1" et "user2" pour les amis
+        friends = Friendship.objects.filter(
+            Q(user1=self.request.user, status=Friendship.ACCEPTED) |
+            Q(user2=self.request.user, status=Friendship.ACCEPTED)
+        )
+
+        # Récupérer les utilisateurs amis
+        friend_users = set()
+        for friendship in friends:
+            if friendship.user1 == self.request.user:
+                friend_users.add(friendship.user2)
+            else:
+                friend_users.add(friendship.user1)
+
+        # Récupérer les posts des amis
+        friend_posts = Post.objects.filter(user__in=friend_users).order_by('-created_at')
+
+        # Combiner les posts de l'utilisateur et des amis
+        posts = user_posts | friend_posts
+
+        # Ajouter les posts et le formulaire dans le context
+        context['posts'] = posts.order_by('-created_at')
+        context['form'] = PostForm()
+
+        # Récupération des demandes d'amitié reçues
+        context['friend_requests'] = Friendship.objects.filter(
+            user2=self.request.user,  
+            status=Friendship.PENDING
+        )
+
         return context
 
     def post(self, request, *args, **kwargs):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user 
+            post.user = request.user
             post.save()
         return redirect('home')
     

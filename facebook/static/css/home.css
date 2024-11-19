@@ -1,13 +1,21 @@
-/* Global Styles */
+/* Styles généraux pour le body */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f2f5;
     margin: 0;
     padding: 0;
-    color: #1c1e21;
 }
 
-.container {
+/* Container spécifique pour la home */
+.home-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Section des posts */
+.left-panel {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
@@ -16,7 +24,6 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Header Styles */
 h2 {
     font-size: 24px;
     color: #1877f2;
@@ -33,7 +40,8 @@ h2 {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.form-home textarea {
+.form-home textarea,
+.form-home input[type="url"] {
     width: 100%;
     padding: 12px;
     margin-bottom: 10px;
@@ -42,15 +50,6 @@ h2 {
     font-size: 14px;
     background-color: #fff;
     resize: vertical;
-}
-
-.form-home input[type="url"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
 }
 
 .form-home button {
@@ -68,12 +67,12 @@ h2 {
     background-color: #145dbf;
 }
 
-/* Post Container */
+/* Conteneur des posts */
 .posts-container {
     margin-top: 20px;
 }
 
-/* Individual Post */
+/* Post individuel */
 .post {
     background-color: #ffffff;
     padding: 15px;
@@ -108,26 +107,81 @@ h2 {
     margin-top: 10px;
 }
 
-/* Empty State Message */
-.posts-container p {
-    font-size: 16px;
-    color: #777;
+/* Section des demandes d'amis */
+.right-panel {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
 }
 
-/* Responsiveness */
+.right-panel h2 {
+    margin-bottom: 15px;
+}
+
+.right-panel ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.right-panel ul li {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.right-panel ul li p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.right-panel form {
+    margin-top: 10px;
+}
+
+.right-panel form button {
+    width: auto;
+    margin-right: 10px;
+}
+
+.btn {
+    margin-top: 5px;
+    /* Un peu d'espace entre les boutons */
+    width: 100%;
+    /* Les boutons peuvent prendre toute la largeur de la section */
+}
+
+.right-panel .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.right-panel .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Responsivité pour petits écrans */
 @media (max-width: 768px) {
-    .container {
-        padding: 15px;
+    .home-container {
+        flex-direction: column;
+        /* Placer les sections une sous l'autre */
+        gap: 10px;
+        /* Réduire l’espace entre les sections */
     }
 
-    .form-home textarea,
-    .form-home input[type="url"] {
-        font-size: 14px;
-        padding: 10px;
+    .left-panel,
+    .right-panel {
+        flex: none;
+        /* Les sections occupent toute la largeur */
     }
 
     .form-home button {
-        font-size: 14px;
         padding: 10px 15px;
+        font-size: 14px;
     }
 }

@@ -3,19 +3,47 @@
 {% load static %}
 
 {% block content %}
+<div class="home-container">
     {% if user.is_authenticated %}
-        <h2>Créer un post</h2>
-        <form class="form-home" method="POST">
-            {% csrf_token %}
-            {{ form.as_p }} 
-            <button type="submit" class="btn btn-primary">Publier</button>
-        </form>
+        <!-- Section des posts -->
+        <div class="left-panel">
+            <h2>Créer un post</h2>
+            <form class="form-home" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Publier</button>
+            </form>
 
-        {% include 'post_list.html' %}
+            {% include 'post_list.html' %}
+        </div>
 
+        <!-- Section des demandes d'amis -->
+        <div class="right-panel">
+            <h2>Demandes d'amitié reçues</h2>
+            {% if friend_requests %}
+                <ul>
+                    {% for request in friend_requests %}
+                        <li>
+                            <p>{{ request.user1.get_full_name }} souhaite devenir votre ami.</p>
+                            <form method="POST" action="{% url 'respond_to_friend_request' request.user1.pk 'accept' %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success">Accepter</button>
+                            </form>
+                            <form method="POST" action="{% url 'respond_to_friend_request' request.user1.pk 'reject' %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Refuser</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucune demande d'amitié en attente.</p>
+            {% endif %}
+        </div>
     {% else %}
         <p>Veuillez <a href="{% url 'login' %}">vous connecter</a> ou <a href="{% url 'register' %}">vous inscrire</a>.</p>
     {% endif %}
+</div>
 {% endblock %}
 
 {% block extra_css %}

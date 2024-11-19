@@ -41,13 +41,13 @@ class SendFriendRequestView(LoginRequiredMixin, RedirectView):
 
 class RespondToFriendRequestView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        action = kwargs.get('action')  
+        action = kwargs.get('action') 
         user2 = get_object_or_404(User, pk=kwargs['pk'])
 
-        # Rechercher une demande d'amitié en attente
+        # Rechercher la demande d’amitié en attente
         friendship = get_object_or_404(
             Friendship,
-            user1=user2, 
+            user1=user2,
             user2=self.request.user,
             status=Friendship.PENDING
         )
@@ -58,4 +58,4 @@ class RespondToFriendRequestView(LoginRequiredMixin, RedirectView):
             friendship.status = Friendship.REJECTED
 
         friendship.save()
-        return reverse('profile', kwargs={'pk': self.request.user.pk})
+        return reverse('home')
