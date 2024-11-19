@@ -1,10 +1,11 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, RedirectView
 from django.urls import reverse
 from django.db.models import Q
 from django.contrib.auth.models import User
 from .models import Friendship
+from django.views.generic import View
    
 class UserSearchView(LoginRequiredMixin, ListView):
     model = User
@@ -59,3 +60,18 @@ class RespondToFriendRequestView(LoginRequiredMixin, RedirectView):
 
         friendship.save()
         return reverse('home')
+    
+class RemoveFriendView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        user2 = get_object_or_404(User, pk=pk)
+
+        friendships = Friendship.objects.filter(
+            user1=request.user, user2=user2
+        ) | Friendship.objects.filter(
+            user1=user2, user2=request.user
+        )
+
+        if friendships.exists():
+            friendships.delete() 
+
+        return redirect('home') 

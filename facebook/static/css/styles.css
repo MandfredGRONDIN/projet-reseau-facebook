@@ -26,6 +26,8 @@ body {
     justify-content: center;
     list-style-type: none;
     padding: 0;
+    align-items: center;
+    align-content: center;
 }
 
 .header .nav-links li {

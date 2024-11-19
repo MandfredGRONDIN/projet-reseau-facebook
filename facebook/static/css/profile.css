@@ -91,3 +91,42 @@
 .profile-header {
     margin-bottom: 30px;
 }
+
+/* Style général pour le formulaire de suppression d'ami */
+.friendship-form-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.remove-friend-form {
+    display: inline-block;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.remove-friend-form:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-remove {
+    background-color: #dc3545;
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-remove:hover {
+    background-color: #c82333;
+}
+
+.btn-remove:focus {
+    outline: none;
+}

@@ -24,8 +24,6 @@ class HomeView(LoginRequiredMixin, TemplateView):
         # Récupérer les posts de l'utilisateur connecté
         user_posts = Post.objects.filter(user=self.request.user).order_by('-created_at')
 
-        # Récupérer les amis de l'utilisateur
-        # On suppose que le modèle Friendship a une relation "user1" et "user2" pour les amis
         friends = Friendship.objects.filter(
             Q(user1=self.request.user, status=Friendship.ACCEPTED) |
             Q(user2=self.request.user, status=Friendship.ACCEPTED)
@@ -55,6 +53,9 @@ class HomeView(LoginRequiredMixin, TemplateView):
             status=Friendship.PENDING
         )
 
+        # Liste des utilisateurs amis pour le template
+        context['friends'] = friend_users 
+
         return context
 
     def post(self, request, *args, **kwargs):
@@ -63,8 +64,8 @@ class HomeView(LoginRequiredMixin, TemplateView):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-        return redirect('home')
-    
+        return redirect('home') 
+      
 # Register View
 class RegisterView(View):
     def get(self, request):

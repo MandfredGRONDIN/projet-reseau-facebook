@@ -2,13 +2,12 @@
 
 {% block content %}
 <div class="friendship-container">
-    <h1>Profil d'{{ profile.user.get_full_name }}</h1>
     
     {% if friendship %}
         {% if friendship.status == 'pending' %}
             <p>Vous avez déjà envoyé une demande d'amitié. Statut : En attente.</p>
         {% elif friendship.status == 'accepted' %}
-            <p>Vous êtes amis avec {{ profile.user.get_full_name }}.</p>
+        {% include 'profil_friendship.html' with friendship=friendship profile=profile %}
         {% elif friendship.status == 'rejected' %}
             <p>Votre demande d'amitié a été refusée.</p>
         {% endif %}
@@ -21,8 +20,4 @@
 </div>
 
 
-{% endblock %}
-
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/friendship.css' %}">
 {% endblock %}

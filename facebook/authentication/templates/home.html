@@ -39,6 +39,20 @@
             {% else %}
                 <p>Aucune demande d'amitié en attente.</p>
             {% endif %}
+
+            <!-- Liste des amis -->
+            <h2>Vos amis</h2>
+            {% if friends %}
+                <ul class="user-list">
+                    {% for friend in friends %}
+                        <li>
+                            <a href="{% url 'profile' pk=friend.pk %}">{{ friend.get_full_name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Vous n'avez pas encore d'amis.</p>
+            {% endif %}            
         </div>
     {% else %}
         <p>Veuillez <a href="{% url 'login' %}">vous connecter</a> ou <a href="{% url 'register' %}">vous inscrire</a>.</p>
