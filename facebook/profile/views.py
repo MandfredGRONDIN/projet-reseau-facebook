@@ -37,7 +37,7 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
     template_name = 'edit_profile.html'
 
     def get_object(self, queryset=None):
-        return self.request.user.profile  
+        return self.request.user.profile
 
     def get_success_url(self):
-        return reverse_lazy('profile')  
+        return reverse_lazy('profile', kwargs={'pk': self.request.user.pk})
