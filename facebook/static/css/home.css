@@ -1,0 +1,133 @@
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    color: #1c1e21;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styles */
+h2 {
+    font-size: 24px;
+    color: #1877f2;
+    /* Bleu Facebook */
+    margin-bottom: 15px;
+}
+
+/* Formulaire de création de post */
+.form-home {
+    background-color: #f5f6f7;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-home textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #fff;
+    resize: vertical;
+}
+
+.form-home input[type="url"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.form-home button {
+    padding: 12px 20px;
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-home button:hover {
+    background-color: #145dbf;
+}
+
+/* Post Container */
+.posts-container {
+    margin-top: 20px;
+}
+
+/* Individual Post */
+.post {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.post p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #050505;
+}
+
+.post strong {
+    color: #1877f2;
+    /* Bleu Facebook */
+    font-size: 16px;
+}
+
+.post img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.post small {
+    font-size: 12px;
+    color: #777;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Empty State Message */
+.posts-container p {
+    font-size: 16px;
+    color: #777;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .form-home textarea,
+    .form-home input[type="url"] {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .form-home button {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}

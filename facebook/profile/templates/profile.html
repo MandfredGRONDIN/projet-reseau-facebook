@@ -1,33 +1,64 @@
 {% extends 'base.html' %}
 
-{% load static %} 
+{% load static %}
 
 {% block content %}
 <div class="profile-container">
     <div class="profile-header">
         <div class="profile-img-container">
-            {% if user.profile.profile_picture %}
+            {% if profile.profile_picture %}
                 <a href="{% url 'edit_profile' %}">
-                    <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+                    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
                 </a>
             {% else %}
                 <a href="{% url 'edit_profile' %}">
                     <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" alt="Default Profile Picture" class="profile-picture">
                 </a>
             {% endif %}
-        
         </div>
         <div class="profile-info">
-            <h2>{{ user.get_full_name }}</h2>
-            <p class="profile-bio">{{ user.profile.bio }}</p>
+            <h2>{{ profile.user.get_full_name }}</h2>
+            {% if profile.bio %}
+                <a href="{% url 'edit_profile' %}">
+                    <p class="profile-bio">{{ profile.bio }}</p>
+                </a>
+            {% else %}
+                <a href="{% url 'edit_profile' %}">
+                    <p class="profile-bio">Ajouter votre bio</p>
+                </a>
+            {% endif %}
         </div>
     </div>
     
-    <div class="profile-details">
-        <h3>Informations du Profil</h3>
-        <ul>
-            <li><strong>Bio :</strong> {{ user.profile.bio }}</li>
-        </ul>
+    <div class="create-post">
+        <h3>Créer un post</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }} 
+            <button type="submit" class="btn btn-primary">Publier</button>
+        </form>
+    </div>
+    
+    <div class="posts-container">
+        <h3>Mes Posts</h3>
+        {% for post in posts %}
+            <div class="post">
+                <p><strong>{{ post.user.first_name }} {{ post.user.last_name }}</strong> a posté :</p>
+                <p>{{ post.content }}</p>
+                {% if post.media_url %}
+                    <img src="{{ post.media_url }}" alt="Post media" class="post-media">
+                {% endif %}
+                <p><small>{{ post.created_at }}</small></p>
+
+                <div class="post-actions">
+                    <button class="like-btn">J'aime</button>
+                    <button class="comment-btn">Commenter</button>
+                    <button class="share-btn">Partager</button>
+                </div>
+            </div>
+        {% empty %}
+            <p>Vous n'avez pas encore de posts.</p>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

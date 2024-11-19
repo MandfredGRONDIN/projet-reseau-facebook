@@ -6,6 +6,7 @@ body {
     padding: 0;
 }
 
+/* Header styles */
 .header {
     background-color: #1877f2;
     padding: 10px 0;
@@ -41,13 +42,7 @@ body {
     text-decoration: underline;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh;
-}
-
+/* Footer styles */
 .footer {
     background-color: #f0f2f5;
     padding: 10px;

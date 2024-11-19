@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
-<div class="container">
-    <h1>Bienvenue sur la page d'accueil</h1>
     {% if user.is_authenticated %}
-        <p>Bonjour, {{ user.username }} ! Vous êtes connecté.</p>
+        <h2>Créer un post</h2>
+        <form class="form-home" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }} 
+            <button type="submit" class="btn btn-primary">Publier</button>
+        </form>
+
+        {% include 'post_list.html' %}
+
     {% else %}
         <p>Veuillez <a href="{% url 'login' %}">vous connecter</a> ou <a href="{% url 'register' %}">vous inscrire</a>.</p>
     {% endif %}
-</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}

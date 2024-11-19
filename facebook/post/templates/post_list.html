@@ -1,0 +1,22 @@
+{% load static %}
+
+<div class="posts-container">
+    {% for post in posts %}
+        <div class="post">
+            <p><strong>{{ post.user.first_name }} {{ post.user.last_name }}</strong> a posté :</p>
+            <p>{{ post.content }}</p>
+            {% if post.media_url %}
+                <img src="{{ post.media_url }}" alt="Post media" class="post-media">
+            {% endif %}
+            <p><small>{{ post.created_at }}</small></p>
+
+            <div class="post-actions">
+                <button class="like-btn">J'aime</button>
+                <button class="comment-btn">Commenter</button>
+                <button class="share-btn">Partager</button>
+            </div>
+        </div>
+    {% empty %}
+        <p>Vous n'avez pas encore de posts.</p>
+    {% endfor %}
+</div>

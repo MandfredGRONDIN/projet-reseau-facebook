@@ -7,12 +7,28 @@ from profile.models import Profile
 from .forms import EmailLoginForm
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from post.models import Post
+from post.forms import PostForm
 
 # Home View
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'home.html'
     login_url = '/login/'
     redirect_field_name = 'next'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.filter(user=self.request.user).order_by('-created_at')
+        context['form'] = PostForm()  
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user 
+            post.save()
+        return redirect('home')
     
 # Register View
 class RegisterView(View):
