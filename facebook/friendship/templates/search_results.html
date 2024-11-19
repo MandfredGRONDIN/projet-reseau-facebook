@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="search-results">
+        <h2>Résultats de la recherche</h2>
+
+        {% if users %}
+            <ul class="user-list">
+                {% for user in users %}
+                    <li><a href="{% url 'profile' pk=user.pk %}">{{ user.get_full_name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aucun utilisateur trouvé.</p>
+        {% endif %}
+    </div>
+{% endblock %}

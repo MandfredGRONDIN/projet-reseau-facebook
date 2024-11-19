@@ -23,21 +23,29 @@
         </div>
         <ul class="nav-links">
             {% if user.is_authenticated %}
-            <li><a href="{% url 'home' %}">Accueil</a></li>
-            <li><a href="{% url 'profile' %}">Profil</a></li>
-            <li>
-                <form method="post" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-link">
-                        <i class="fas fa-sign-out-alt"></i> Déconnexion
-                    </button>
-                </form>
-            </li>
+                <li>
+                    <form method="get" action="{% url 'search_users' %}" class="search-form">
+                        <input type="text" name="q" placeholder="Rechercher des personnes..." class="search-input" />
+                        <button type="submit" class="search-button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </li>
+                <li><a href="{% url 'home' %}">Accueil</a></li>
+                <li><a href="{% url 'profile' pk=user.pk %}">Profil</a></li>
+                <li>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link">
+                            <i class="fas fa-sign-out-alt"></i> Déconnexion
+                        </button>
+                    </form>
+                </li>
             {% else %}
-            <li><a href="{% url 'login' %}">Se connecter</a></li>
+                <li><a href="{% url 'login' %}">Se connecter</a></li>
             {% endif %}
         </ul>
-    </header>
+    </header>    
 
     <!-- Contenu de la page -->
     <div class="container">

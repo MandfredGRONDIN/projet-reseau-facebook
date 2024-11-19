@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block content %}
+{% if user == profile.user %}
 <div class="profile-container">
     <div class="profile-header">
         <div class="profile-img-container">
@@ -61,6 +62,9 @@
         {% endfor %}
     </div>
 </div>
+{% else %}
+    {% include 'friendship.html' with friendship=friendship profile=profile %}
+{% endif %}
 {% endblock %}
 
 {% block extra_css %}

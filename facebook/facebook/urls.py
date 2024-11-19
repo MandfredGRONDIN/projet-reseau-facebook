@@ -6,4 +6,5 @@ urlpatterns = [
     path('', include('profile.urls')),
     path('', include('authentication.urls')),
     path('', include('post.urls')),
+    path('', include('friendship.urls')),
 ]
