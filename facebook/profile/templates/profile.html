@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %} 
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="profile-img-container">
+            {% if user.profile.profile_picture %}
+                <a href="{% url 'edit_profile' %}">
+                    <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+                </a>
+            {% else %}
+                <a href="{% url 'edit_profile' %}">
+                    <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" alt="Default Profile Picture" class="profile-picture">
+                </a>
+            {% endif %}
+        
+        </div>
+        <div class="profile-info">
+            <h2>{{ user.get_full_name }}</h2>
+            <p class="profile-bio">{{ user.profile.bio }}</p>
+        </div>
+    </div>
+    
+    <div class="profile-details">
+        <h3>Informations du Profil</h3>
+        <ul>
+            <li><strong>Bio :</strong> {{ user.profile.bio }}</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}

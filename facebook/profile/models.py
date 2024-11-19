@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Utilisateur")
     bio = models.TextField(
@@ -22,7 +21,7 @@ class Profile(models.Model):
     class Meta:
         verbose_name = _("Profile")
         verbose_name_plural = _("Profiles")
-        ordering = ["user__date_joined"]  
+        ordering = ["user__date_joined"]
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name} ({self.user.email})"

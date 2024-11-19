@@ -1,0 +1,93 @@
+/* Conteneur général du profil */
+.profile-container {
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 30px;
+    font-family: 'Arial', sans-serif;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* En-tête du profil */
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 20px;
+}
+
+/* Image du profil */
+.profile-img-container {
+    flex-shrink: 0;
+    margin-right: 25px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+    object-fit: cover;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Informations du profil */
+.profile-info {
+    flex-grow: 1;
+}
+
+.profile-info h2 {
+    font-size: 28px;
+    color: #333;
+    margin: 0;
+}
+
+.profile-info .profile-email {
+    font-size: 16px;
+    color: #777;
+    margin-top: 10px;
+}
+
+.profile-info .profile-bio {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Détails du profil (section avec liste d'informations) */
+.profile-details {
+    background-color: #f5f6f7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile-details h3 {
+    font-size: 22px;
+    color: #333;
+    margin-top: 0;
+}
+
+.profile-details ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.profile-details li {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #444;
+}
+
+.profile-details strong {
+    font-weight: bold;
+    color: #1877f2;
+}
+
+/* Ajout de l'espace entre les sections */
+.profile-details,
+.profile-header {
+    margin-bottom: 30px;
+}
