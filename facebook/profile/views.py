@@ -8,7 +8,8 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from friendship.models import Friendship
 from django.db.models import Q
-
+from post.forms import PostForm
+from django.shortcuts import redirect
 
 class ProfileView(TemplateView):
     template_name = 'profile.html'
@@ -22,6 +23,7 @@ class ProfileView(TemplateView):
 
         context['profile'] = user.profile
         context['posts'] = Post.objects.filter(user=user)
+        context['form'] = PostForm()
 
         # Vérifier l'amitié si ce n'est pas le profil de l'utilisateur actuel
         if current_user != user:
@@ -31,6 +33,14 @@ class ProfileView(TemplateView):
             context['friendship'] = friendship
 
         return context
+    
+    def post(self, request, *args, **kwargs):
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+        return redirect('profile', pk=request.user.pk) 
     
 class EditProfileView(LoginRequiredMixin, UpdateView):
     model = Profile
