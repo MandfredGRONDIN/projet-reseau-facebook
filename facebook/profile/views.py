@@ -16,14 +16,15 @@ class ProfileView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        pk = kwargs['pk']  
-        user = get_object_or_404(User, pk=pk)  
-        current_user = self.request.user 
+        pk = kwargs['pk']
+        user = get_object_or_404(User, pk=pk)
+        current_user = self.request.user
 
-        context['profile'] = user.profile  
-        context['posts'] = Post.objects.filter(user=user)  
+        context['profile'] = user.profile
+        context['posts'] = Post.objects.filter(user=user)
 
-        if current_user != user:  
+        # Vérifier l'amitié si ce n'est pas le profil de l'utilisateur actuel
+        if current_user != user:
             friendship = Friendship.objects.filter(
                 Q(user1=current_user, user2=user) | Q(user1=user, user2=current_user)
             ).first()

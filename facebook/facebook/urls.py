@@ -7,4 +7,5 @@ urlpatterns = [
     path('', include('authentication.urls')),
     path('', include('post.urls')),
     path('', include('friendship.urls')),
+    path('', include('comment.urls')),
 ]

@@ -31,30 +31,53 @@
         </div>
     </div>
     
-    <div class="create-post">
-        <h3>Créer un post</h3>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }} 
-            <button type="submit" class="btn btn-primary">Publier</button>
-        </form>
-    </div>
+    <form class="form-home" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Publier</button>
+    </form>
     
     <div class="posts-container">
-        <h3>Mes Posts</h3>
         {% for post in posts %}
-            <div class="post">
+            <div class="post" id="post-{{ post.id }}">
                 <p><strong>{{ post.user.first_name }} {{ post.user.last_name }}</strong> a posté :</p>
                 <p>{{ post.content }}</p>
                 {% if post.media_url %}
                     <img src="{{ post.media_url }}" alt="Post media" class="post-media">
                 {% endif %}
                 <p><small>{{ post.created_at }}</small></p>
-
+    
                 <div class="post-actions">
-                    <button class="like-btn">J'aime</button>
-                    <button class="comment-btn">Commenter</button>
-                    <button class="share-btn">Partager</button>
+                    <button class="comment-btn" data-post-id="{{ post.id }}">Commenter</button>
+                </div>
+    
+                <!-- Section des commentaires -->
+                <div class="comments-section" id="comments-section-{{ post.id }}" style="display: none;">
+                    {% for comment in post.comments.all %}
+                        <div class="comment">
+                            <p><strong>{{ comment.user.username }}</strong>: {{ comment.content }}</p>
+                            {% if comment.media_url %}
+                                <a href="{{ comment.media_url }}" target="_blank">Voir le média</a>
+                            {% endif %}
+                            <small>{{ comment.created_at }}</small>
+                        </div>
+                        {% for reply in comment.replies.all %}
+                            <div class="reply" style="margin-left: 20px;">
+                                <p><strong>{{ reply.user.username }}</strong>: {{ reply.content }}</p>
+                                <small>{{ reply.created_at }}</small>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+    
+                    <!-- Formulaire d'ajout de commentaire -->
+                    <form action="{% url 'comment_add' post.id %}" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <button type="submit">Commenter</button>
+                    </form>
+                    
+                    
                 </div>
             </div>
         {% empty %}
@@ -62,6 +85,25 @@
         {% endfor %}
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const commentButtons = document.querySelectorAll('.comment-btn');
+
+        commentButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const postId = button.getAttribute('data-post-id');
+                const commentSection = document.getElementById(`comments-section-${postId}`);
+
+                if (commentSection.style.display === 'none' || commentSection.style.display === '') {
+                    commentSection.style.display = 'block';
+                } else {
+                    commentSection.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
 {% else %}
     {% include 'friendship.html' with friendship=friendship profile=profile %}
 {% endif %}
