@@ -7,7 +7,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = 'create_post.html'
-    success_url = '/' 
+    success_url = 'home' 
     
     def form_valid(self, form):
         form.instance.user = self.request.user  

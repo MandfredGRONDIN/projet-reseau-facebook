@@ -10,7 +10,7 @@ from django.views.generic import TemplateView
 from post.models import Post
 from post.forms import PostForm
 from friendship.models import Friendship
-from django.db.models import Q
+from django.db.models import Count,Q
 
 # Home View
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -43,9 +43,22 @@ class HomeView(LoginRequiredMixin, TemplateView):
         # Combiner les posts de l'utilisateur et des amis
         posts = user_posts | friend_posts
 
-        # Ajouter les posts et le formulaire dans le context
+        # Ajouter les posts dans le context
         context['posts'] = posts.order_by('-created_at')
         context['form'] = PostForm()
+
+        # Calcul des réactions pour chaque post
+        reactions_count = []
+        for post in posts:
+            # Comptage des réactions par type et création d'une liste de dicts
+            reaction_count = post.reaction_set.values('type').annotate(count=Count('type'))
+            reactions_count.append({
+                'post_id': post.id,
+                'reactions': reaction_count
+            })
+
+        # Ajouter la liste des réactions dans le context
+        context['reactions_count'] = reactions_count
 
         # Récupération des demandes d'amitié reçues
         context['friend_requests'] = Friendship.objects.filter(
@@ -57,7 +70,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
         context['friends'] = friend_users 
 
         return context
-
+    
     def post(self, request, *args, **kwargs):
         form = PostForm(request.POST)
         if form.is_valid():
@@ -66,6 +79,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
             post.save()
         return redirect('home') 
       
+
 # Register View
 class RegisterView(View):
     def get(self, request):

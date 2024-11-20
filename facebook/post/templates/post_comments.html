@@ -1,0 +1,25 @@
+<div class="comments-section" id="comments-section-{{ post.id }}" style="display: none;">
+    {% for comment in post.comments.all %}
+        <div class="comment">
+            <p><strong>{{ comment.user.first_name }} {{ comment.user.last_name }}</strong>: {{ comment.content }}</p>
+            {% if comment.media_url %}
+                <a href="{{ comment.media_url }}" target="_blank">Voir le média</a>
+            {% endif %}
+            <small>{{ comment.created_at }}</small>
+        </div>
+        {% for reply in comment.replies.all %}
+            <div class="reply" style="margin-left: 20px;">
+                <p><strong>{{ reply.user.username }}</strong>: {{ reply.content }}</p>
+                <small>{{ reply.created_at }}</small>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <!-- Formulaire d'ajout de commentaire -->
+    <form action="{% url 'comment_add' post.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <button type="submit">Commenter</button>
+    </form>
+</div>

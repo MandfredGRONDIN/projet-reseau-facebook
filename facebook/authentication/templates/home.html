@@ -7,12 +7,14 @@
     {% if user.is_authenticated %}
         <!-- Section des posts -->
         <div class="left-panel">
-            <h2>Créer un post</h2>
-            <form class="form-home" method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Publier</button>
-            </form>
+            <div class="create-post">
+                <h2>Créer un post</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }} 
+                    <button type="submit" class="btn btn-primary">Publier</button>
+                </form>
+            </div>
 
             {% include 'post_list.html' %}
         </div>

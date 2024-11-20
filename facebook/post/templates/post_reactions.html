@@ -1,0 +1,40 @@
+<div class="post-reactions">
+    <!-- Bouton Réagir -->
+    <button class="btn btn-outline-primary btn-sm reaction-btn" data-post-id="{{ post.id }}">
+        Réagir
+    </button>
+
+    <!-- Sélection des réactions (masqué initialement) -->
+    <div class="reaction-options" id="reaction-options-{{ post.id }}" style="display:none;">
+        <form method="post" action="{% url 'add_reaction' post.id %}" class="reaction-form">
+            {% csrf_token %}
+            <div class="list-group">
+                <label class="list-group-item d-flex align-items-center">
+                    <input type="radio" name="type" value="like" class="me-2">
+                    <i class="fas fa-thumbs-up me-2"></i> 
+                </label>
+                <label class="list-group-item d-flex align-items-center">
+                    <input type="radio" name="type" value="love" class="me-2">
+                    <i class="fas fa-heart me-2"></i> 
+                </label>
+                <label class="list-group-item d-flex align-items-center">
+                    <input type="radio" name="type" value="haha" class="me-2">
+                    <i class="fas fa-laugh me-2"></i> 
+                </label>
+                <label class="list-group-item d-flex align-items-center">
+                    <input type="radio" name="type" value="wow" class="me-2">
+                    <i class="fas fa-surprise me-2"></i> 
+                </label>
+                <label class="list-group-item d-flex align-items-center">
+                    <input type="radio" name="type" value="sad" class="me-2">
+                    <i class="fas fa-sad-tear me-2"></i>
+                </label>
+                <label class="list-group-item d-flex align-items-center">
+                    <input type="radio" name="type" value="angry" class="me-2">
+                    <i class="fas fa-angry me-2"></i> 
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm w-100 mt-2">Envoyer</button>
+        </form>
+    </div>
+</div>

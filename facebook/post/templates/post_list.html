@@ -1,64 +1,123 @@
-<div class="posts-container">
-    {% for post in posts %}
-        <div class="post" id="post-{{ post.id }}">
-            <p><strong>{{ post.user.first_name }} {{ post.user.last_name }}</strong> a posté :</p>
-            <p>{{ post.content }}</p>
-            {% if post.media_url %}
-                <img src="{{ post.media_url }}" alt="Post media" class="post-media">
-            {% endif %}
-            <p><small>{{ post.created_at }}</small></p>
 
-            <div class="post-actions">
-                <button class="comment-btn" data-post-id="{{ post.id }}">Commenter</button>
-            </div>
-
-            <!-- Section des commentaires -->
-            <div class="comments-section" id="comments-section-{{ post.id }}" style="display: none;">
-                {% for comment in post.comments.all %}
-                    <div class="comment">
-                        <p><strong>{{ comment.user.username }}</strong>: {{ comment.content }}</p>
-                        {% if comment.media_url %}
-                            <a href="{{ comment.media_url }}" target="_blank">Voir le média</a>
-                        {% endif %}
-                        <small>{{ comment.created_at }}</small>
+{% load static %}
+<div class="container mt-4">
+    <div class="posts-container">
+        {% for post in posts %}
+            <div class="post mb-4 p-4 border rounded shadow-sm" id="post-{{ post.id }}">
+                <div class="d-flex align-items-center mb-2">
+                    {% if post.user.profile.profile_picture %}
+                        <!-- Affiche l'image de profil si elle existe -->
+                        <img src="{{ post.user.profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture-min">
+                    {% else %}
+                        <!-- Affiche une image par défaut si l'image de profil n'existe pas -->
+                        <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" alt="Default Profile Picture" class="profile-picture">
+                    {% endif %}
+                    <div class="ms-2">
+                        <strong>{{ post.user.first_name }} {{ post.user.last_name }}</strong>
+                        <small class="text-muted">a posté</small>
                     </div>
-                    {% for reply in comment.replies.all %}
-                        <div class="reply" style="margin-left: 20px;">
-                            <p><strong>{{ reply.user.username }}</strong>: {{ reply.content }}</p>
-                            <small>{{ reply.created_at }}</small>
-                        </div>
+                </div>
+                
+                <p>{{ post.content }}</p>
+                
+                {% if post.media_url %}
+                    <img src="{{ post.media_url }}" alt="Post media" class="img-fluid rounded mb-2">
+                {% endif %}
+                
+                <p class="text-muted"><small>{{ post.created_at }}</small></p>
+                <div class="post-reactions">
+                    {% for reaction_data in reactions_count %}
+                        {% if reaction_data.post_id == post.id %}
+                            {% for reaction in reaction_data.reactions %}
+                                <span class="reaction-item">
+                                    <!-- Affichage de l'icône selon le type de réaction -->
+                                    {{ reaction.count }}
+                                    {% if reaction.type == 'like' %}
+                                        <i class="fas fa-thumbs-up"></i>
+                                    {% elif reaction.type == 'love' %}
+                                        <i class="fas fa-heart"></i>
+                                    {% elif reaction.type == 'haha' %}
+                                        <i class="fas fa-laugh"></i>
+                                    {% elif reaction.type == 'wow' %}
+                                        <i class="fas fa-surprise"></i>
+                                    {% elif reaction.type == 'sad' %}
+                                        <i class="fas fa-sad-tear"></i>
+                                    {% elif reaction.type == 'angry' %}
+                                        <i class="fas fa-angry"></i>
+                                    {% endif %}
+                                </span>
+                            {% endfor %}
+                        {% endif %}
                     {% endfor %}
-                {% endfor %}
-
-                <!-- Formulaire d'ajout de commentaire -->
-                <form action="{% url 'comment_add' post.id %}" method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="hidden" name="next" value="{{ request.path }}">
-                    <button type="submit">Commenter</button>
-                </form>
+                </div>
                 
-                
+                {% include 'post_reactions.html' with post=post  %}
+                <div class="post-actions">
+                    <button class="btn btn-light btn-sm comment-btn" data-post-id="{{ post.id }}">
+                        <i class="fas fa-comment-alt"></i> Commenter
+                    </button>
+                </div>
+                {% include 'post_comments.html' with post=post form=form %}
             </div>
-        </div>
-    {% empty %}
-        <p>Vous n'avez pas encore de posts.</p>
-    {% endfor %}
+        {% empty %}
+            <p>Vous n'avez pas encore de posts.</p>
+        {% endfor %}
+    </div>
 </div>
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/post.css' %}">
+{% endblock %}
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const commentButtons = document.querySelectorAll('.comment-btn');
+        const reactionButtons = document.querySelectorAll('.reaction-btn');
 
+        // Gestion de l'affichage des commentaires
         commentButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const postId = button.getAttribute('data-post-id');
                 const commentSection = document.getElementById(`comments-section-${postId}`);
 
-                if (commentSection.style.display === 'none' || commentSection.style.display === '') {
-                    commentSection.style.display = 'block';
-                } else {
-                    commentSection.style.display = 'none';
-                }
+                // Toggle entre afficher/masquer la section des commentaires
+                commentSection.style.display = commentSection.style.display === 'none' || commentSection.style.display === '' ? 'block' : 'none';
+            });
+        });
+        
+        // Afficher les options de réaction au clic
+        reactionButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const postId = button.getAttribute('data-post-id');
+                const reactionOptions = document.getElementById(`reaction-options-${postId}`);
+                
+                // Toggle entre afficher/masquer les options de réaction
+                reactionOptions.style.display = reactionOptions.style.display === 'none' || reactionOptions.style.display === '' ? 'block' : 'none';
+            });
+        });
+
+        // Gestion des soumissions de réaction via AJAX
+        const reactionForms = document.querySelectorAll('.reaction-form');
+        reactionForms.forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); 
+                
+                const postId = form.getAttribute('action').split('/')[2];  
+                const formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name="csrfmiddlewaretoken"]').value
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    location.reload();
+
+                })
+                .catch(error => console.error('Erreur:', error));
             });
         });
     });

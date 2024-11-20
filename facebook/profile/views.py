@@ -7,7 +7,7 @@ from post.models import Post
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from friendship.models import Friendship
-from django.db.models import Q
+from django.db.models import Q, Count
 from post.forms import PostForm
 from django.shortcuts import redirect
 
@@ -31,6 +31,20 @@ class ProfileView(TemplateView):
                 Q(user1=current_user, user2=user) | Q(user1=user, user2=current_user)
             ).first()
             context['friendship'] = friendship
+
+        posts = Post.objects.filter(user=self.request.user).order_by('-created_at')
+
+        reactions_count = []
+        for post in posts:
+            # Comptage des réactions par type et création d'une liste de dicts
+            reaction_count = post.reaction_set.values('type').annotate(count=Count('type'))
+            reactions_count.append({
+                'post_id': post.id,
+                'reactions': reaction_count
+            })
+
+        # Ajouter la liste des réactions dans le context
+        context['reactions_count'] = reactions_count
 
         return context
     
