@@ -12,3 +12,59 @@
     border-radius: 100%;
     margin-top: 10px;
 }
+
+/* Section des commentaires */
+.comments-section {
+    background-color: #f8f9fa;
+    /* Clair, pour contraster avec le contenu principal */
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-top: 10px;
+}
+
+/* Avatar des commentaires */
+.comment-avatar,
+.reply-avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border: 2px solid #e9ecef;
+    /* Bord clair */
+}
+
+/* Texte des commentaires */
+.comment-text,
+.reply-text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Auteur et texte supplémentaire */
+.comment-author,
+.reply-author {
+    font-weight: bold;
+    color: #0d6efd;
+    /* Couleur principale de Bootstrap */
+}
+
+.comment-header small,
+.reply-author small {
+    color: #6c757d;
+    /* Texte secondaire */
+}
+
+/* Liste des réponses */
+.replies {
+    border-left: 2px solid #e9ecef;
+    padding-left: 10px;
+}
+
+/* Bouton et textarea */
+.add-comment-form textarea {
+    border-radius: 20px;
+    resize: none;
+}
+
+.add-comment-form .btn {
+    float: right;
+}
