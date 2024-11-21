@@ -56,6 +56,12 @@
                     <button class="btn btn-light btn-sm comment-btn" data-post-id="{{ post.id }}">
                         <i class="fas fa-comment-alt"></i> Commenter
                     </button>
+                    <form action="{% url 'share_post' post.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-light btn-sm">
+                            <i class="fas fa-share"></i> Partager
+                        </button>
+                    </form>
                 </div>
                 {% include 'post_comments.html' with post=post form=form %}
             </div>

@@ -50,7 +50,6 @@ class HomeView(LoginRequiredMixin, TemplateView):
         # Calcul des réactions pour chaque post
         reactions_count = []
         for post in posts:
-            # Comptage des réactions par type et création d'une liste de dicts
             reaction_count = post.reaction_set.values('type').annotate(count=Count('type'))
             reactions_count.append({
                 'post_id': post.id,

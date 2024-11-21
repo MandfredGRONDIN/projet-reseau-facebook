@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'friendship',
     'comment',
     'reaction',
+    'share',
 ]
 
 MIDDLEWARE = [

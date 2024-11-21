@@ -9,4 +9,5 @@ urlpatterns = [
     path('', include('friendship.urls')),
     path('', include('comment.urls')),
     path('', include('reaction.urls')),
+    path('', include('share.urls')),
 ]

@@ -23,15 +23,11 @@
         <!-- Section des posts -->
         <div class="middle-panel">
             <div class="create-post">
-                <h2>Créer un post</h2>
-                <form method="POST">
-                    {% csrf_token %}
-                    {{ form.as_p }} 
-                    <button type="submit" class="btn btn-primary">Publier</button>
-                </form>
+                <h1>Posts Partagés</h1>
+
             </div>
 
-            {% include 'post_list.html' %}
+            {% include 'shared_posts.html' %}
         </div>
 
         <!-- Section des demandes d'amis -->
@@ -78,5 +74,5 @@
 {% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/shared_home.css' %}">
 {% endblock %}
