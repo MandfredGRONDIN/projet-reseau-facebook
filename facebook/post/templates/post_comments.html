@@ -18,7 +18,7 @@
             {% if comment.media_url %}
                 <a href="{{ comment.media_url }}" target="_blank" class="d-block text-primary">Voir le média</a>
             {% endif %}
-            <small class="text-muted">{{ comment.created_at }}</small>
+            <small class="text-muted"><em>{{ comment.created_at|date:"d M Y, H:i" }}</em></small>
             
             <!-- Réponses -->
             {% for reply in comment.replies.all %}
@@ -36,7 +36,7 @@
                         </p>
                     </div>
                     <p class="text-muted">{{ reply.content }}</p>
-                    <small class="text-muted">{{ reply.created_at }}</small>
+                    <small class="text-muted"><em>{{ reply.created_at|date:"d M Y, H:i" }}</em></small>
                 </div>
             {% endfor %}
         </div>

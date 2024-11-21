@@ -10,8 +10,10 @@
                         <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" alt="Default Profile Picture" class="profile-picture">
                     {% endif %}
                     <div class="ms-2">
-                        <strong>{{ post.user.first_name }} {{ post.user.last_name }}</strong>
-                        <small class="text-muted">a posté</small>
+                        <p class="text-muted">
+                            <strong>{{ post.user.first_name }} {{ post.user.last_name }}</strong>
+                            <small><em>{{ post.created_at|date:"d M Y, H:i" }} :</em></small>
+                        </p>
                     </div>
                 </div>
                 
@@ -21,7 +23,6 @@
                     <img src="{{ post.media_url }}" alt="Post media" class="img-fluid rounded mb-2">
                 {% endif %}
                 
-                <p class="text-muted"><small>{{ post.created_at }}</small></p>
                 
                 <div class="post-reactions">
                     {% for reaction_data in reactions_count %}
