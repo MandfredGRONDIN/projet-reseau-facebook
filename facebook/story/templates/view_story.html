@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="story-page-container text-center">
+        <h1 class="mb-4">Story de {{ story.user.username }}</h1>
+        
+        <div class="story-item">
+            <img src="{{ story.media_url }}" alt="Story de {{ story.user.username }}" class="img-fluid" />
+            <div class="story-info mt-3">
+                <p class="font-weight-bold">Posté par {{ story.user.username }}</p>
+                <p>Expire le {{ story.expiration_date|date:"d/m/Y" }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

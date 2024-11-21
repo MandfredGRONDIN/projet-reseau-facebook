@@ -11,6 +11,7 @@ from post.models import Post
 from post.forms import PostForm
 from friendship.models import Friendship
 from django.db.models import Count,Q
+from story.forms import StoryForm
 
 # Home View
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -46,6 +47,8 @@ class HomeView(LoginRequiredMixin, TemplateView):
         # Ajouter les posts dans le context
         context['posts'] = posts.order_by('-created_at')
         context['form'] = PostForm()
+        context['story_form'] = StoryForm()
+        context['stories'] = self.request.user.story_set.all()
 
         # Calcul des réactions pour chaque post
         reactions_count = []

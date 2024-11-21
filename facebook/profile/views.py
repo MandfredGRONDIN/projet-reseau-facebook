@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, UpdateView
+from django.views.generic import TemplateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Profile
@@ -10,6 +10,7 @@ from friendship.models import Friendship
 from django.db.models import Q, Count
 from post.forms import PostForm
 from django.shortcuts import redirect
+from django.contrib import messages
 
 class ProfileView(TemplateView):
     template_name = 'profile.html'
@@ -66,3 +67,16 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('profile', kwargs={'pk': self.request.user.pk})
+
+class DeleteProfileView(LoginRequiredMixin, DeleteView):
+    model = User
+    success_url = reverse_lazy('home')  
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def delete(self, request, *args, **kwargs):
+        user = self.get_object()
+        user.delete()  
+        messages.success(request, "Votre profil a été supprimé avec succès.")
+        return redirect(self.success_url) 

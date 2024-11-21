@@ -10,4 +10,5 @@ urlpatterns = [
     path('', include('comment.urls')),
     path('', include('reaction.urls')),
     path('', include('share.urls')),
+    path('', include('story.urls')),
 ]

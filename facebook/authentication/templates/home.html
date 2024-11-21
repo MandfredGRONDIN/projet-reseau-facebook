@@ -5,7 +5,6 @@
 {% block content %}
 <div class="home-container d-flex">
     {% if user.is_authenticated %}
-        <!-- Panel gauche -->
         <div class="left-panel">
             <h2>Navigation</h2>
             <ul class="nav flex-column">
@@ -16,12 +15,15 @@
                     <a href="{% url 'shared_posts' %}" class="btn btn-outline-secondary w-100 mb-3">
                         Posts Partagés
                     </a>
+                    <a href="{% url 'create_story' %}" class="btn btn-outline-secondary w-100 mb-3">
+                        Nouvelle story
+                    </a>
                 </li>
             </ul>
         </div>
 
-        <!-- Section des posts -->
         <div class="middle-panel">
+            {% include 'story_list.html' %}
             <div class="create-post">
                 <h2>Créer un post</h2>
                 <form method="POST">

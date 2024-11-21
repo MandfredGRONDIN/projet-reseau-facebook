@@ -1,0 +1,143 @@
+/* Conteneur des stories */
+.story-container {
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    /* Permet de faire défiler horizontalement les stories */
+}
+
+/* Chaque story */
+.story-item {
+    position: relative;
+    width: 120px;
+    /* Taille par défaut de chaque story */
+    min-width: 120px;
+    /* Largeur minimale */
+    height: 180px;
+    /* Hauteur de chaque story */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: none;
+    /* Supprime l'effet de transition */
+    flex-shrink: 0;
+    /* Empêche les stories de se rétrécir lorsque l'espace est limité */
+}
+
+/* Retirer l'effet de survol */
+.story-item:hover {
+    transform: none;
+    /* Désactive l'effet de grossissement */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Effet d'ombre léger au survol */
+}
+
+/* Image de la story (ajustée pour ne pas être déformée) */
+.story-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Garder une proportion correcte sans déformation */
+    border-radius: 8px;
+    /* Coins arrondis */
+    transition: none;
+    /* Evite tout effet de transition de taille */
+}
+
+/* Informations de la story (Nom d'utilisateur et expiration) */
+.story-info {
+    background: rgba(0, 0, 0, 0.5);
+    /* Fond sombre semi-transparent */
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 8px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+/* Texte du titre (si pas de stories disponibles) */
+.text-center {
+    font-size: 16px;
+    color: #555;
+    margin-top: 20px;
+}
+
+/* Scroll horizontal propre */
+.story-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.story-container::-webkit-scrollbar-thumb {
+    background: #1877f2;
+    border-radius: 10px;
+}
+
+.story-container::-webkit-scrollbar-track {
+    background: #f0f2f5;
+}
+
+/* Story Image pour le carousel (mise à jour pour le carousel si nécessaire) */
+.story-img {
+    height: 400px;
+    /* Vous pouvez ajuster la hauteur selon vos besoins */
+    object-fit: cover;
+    border-radius: 8px;
+    /* Coins arrondis */
+}
+
+/* Ajout de styles aux éléments du carousel */
+.carousel-item {
+    position: relative;
+}
+
+/* Définir la taille et la position de la légende */
+.carousel-caption {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fond sombre semi-transparent */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Mettre le texte en gras et améliorer la lisibilité */
+.carousel-caption p {
+    font-weight: bold;
+    margin: 0;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Icônes de contrôle avec fond sombre */
+    border-radius: 50%;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    height: 100%;
+}
+
+/* Réduire la taille du carousel sur les petits écrans */
+@media (max-width: 768px) {
+    .story-img {
+        height: 250px;
+        /* Image plus petite sur petits écrans */
+    }
+}

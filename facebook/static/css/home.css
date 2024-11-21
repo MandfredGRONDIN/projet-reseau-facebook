@@ -201,3 +201,80 @@ h2 {
         font-size: 14px;
     }
 }
+
+/* Styles pour la section des stories */
+.stories-panel {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stories-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.stories-wrapper {
+    display: flex;
+    gap: 15px;
+}
+
+.story {
+    width: 100px;
+    text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.story img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.story p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.create-story {
+    margin-top: 30px;
+}
+
+.create-story h3 {
+    font-size: 20px;
+    color: #1877f2;
+}
+
+.create-story form {
+    margin-top: 15px;
+}
+
+.create-story input[type="url"],
+.create-story input[type="datetime-local"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.create-story button {
+    background-color: #1877f2;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.create-story button:hover {
+    background-color: #145dbf;
+}
