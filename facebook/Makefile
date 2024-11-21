@@ -48,6 +48,10 @@ migrate:
 createsuperuser:
 	${COMPOSE} run facebook python manage.py createsuperuser
 
+# Commande pour importer des données fake depuis un fichier JSON
+import_fake_data:
+	${COMPOSE} run --rm facebook python /app/import_fake_data.py
+
 # Pour exécuter l'application
 run: 
 	${COMPOSE} up
