@@ -11,7 +11,9 @@ from post.models import Post
 from post.forms import PostForm
 from friendship.models import Friendship
 from django.db.models import Count,Q
-from story.forms import StoryForm
+from story.models import Story
+from django.utils import timezone
+
 
 # Home View
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -25,6 +27,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
         # Récupérer les posts de l'utilisateur connecté
         user_posts = Post.objects.filter(user=self.request.user).order_by('-created_at')
 
+        # Récupérer les amis de l'utilisateur connecté
         friends = Friendship.objects.filter(
             Q(user1=self.request.user, status=Friendship.ACCEPTED) |
             Q(user2=self.request.user, status=Friendship.ACCEPTED)
@@ -47,8 +50,24 @@ class HomeView(LoginRequiredMixin, TemplateView):
         # Ajouter les posts dans le context
         context['posts'] = posts.order_by('-created_at')
         context['form'] = PostForm()
-        context['story_form'] = StoryForm()
-        context['stories'] = self.request.user.story_set.all()
+
+        # Récupérer les stories de l'utilisateur connecté
+        user_stories = Story.objects.filter(
+            user=self.request.user,
+            expiration_date__gte=timezone.now() 
+        )
+        
+        # Récupérer les stories des amis
+        friend_stories = Story.objects.filter(
+            user__in=friend_users,
+            expiration_date__gte=timezone.now() 
+        ).order_by('-created_at')
+
+        # Combiner les stories de l'utilisateur et de ses amis
+        stories = user_stories | friend_stories
+
+        # Ajouter les stories dans le context
+        context['stories'] = stories.order_by('-created_at')
 
         # Calcul des réactions pour chaque post
         reactions_count = []
@@ -79,8 +98,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-        return redirect('home') 
-      
+        return redirect('home')
 
 # Register View
 class RegisterView(View):
