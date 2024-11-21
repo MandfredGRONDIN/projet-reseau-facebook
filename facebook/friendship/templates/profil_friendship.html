@@ -1,7 +1,7 @@
 {% load static %}
 
 {% block content %}
-<div class="friendship-form-container">
+<div class="friendship-container">
     <form method="POST" action="{% url 'remove_friend' pk=profile.user.pk %}" class="remove-friend-form">
         {% csrf_token %}
         <button type="submit" class="btn btn-remove">Retirer de la liste d'amis</button>
@@ -10,11 +10,15 @@
 
 <div class="profile-container">
     <div class="profile-header">
-        <div class="profile-img-container">
+        <div class="profile-img-container-big">
             {% if profile.profile_picture %}
-                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+                <a href="{% url 'edit_profile' %}">
+                    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture-big">
+                </a>
             {% else %}
-                <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" alt="Default Profile Picture" class="profile-picture">
+                <a href="{% url 'edit_profile' %}">
+                    <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" alt="Default Profile Picture" class="profile-picture-big">
+                </a>
             {% endif %}
         </div>
         <div class="profile-info">
@@ -26,11 +30,11 @@
             {% endif %}
         </div>
     </div>
-        
+    
     {% include 'post_list.html' %}
 </div>
 {% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/friendship.css' %}">
 {% endblock %}

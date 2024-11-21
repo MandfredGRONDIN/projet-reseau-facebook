@@ -1,13 +1,13 @@
 {% load static %}
 
 {% block content %}
-<div class="friendship-container">
+<div>
     
     {% if friendship %}
         {% if friendship.status == 'pending' %}
             <p>Vous avez déjà envoyé une demande d'amitié. Statut : En attente.</p>
         {% elif friendship.status == 'accepted' %}
-        {% include 'profil_friendship.html' with friendship=friendship profile=profile %}
+            {% include 'profil_friendship.html' with friendship=friendship profile=profile %}
         {% elif friendship.status == 'rejected' %}
             <p>Votre demande d'amitié a été refusée.</p>
         {% endif %}

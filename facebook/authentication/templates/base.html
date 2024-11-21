@@ -20,33 +20,35 @@
 
     <!-- En-tête -->
     <header class="header">
-        <div class="logo">
-            Facebook
-        </div>
-        <ul class="nav-links">
+        <div class="nav-left">
+            
             {% if user.is_authenticated %}
-                <li>
-                    <form method="get" action="{% url 'search_users' %}" class="search-form">
-                        <input type="text" name="q" placeholder="Rechercher des personnes..." class="search-input" />
-                        <button type="submit" class="search-button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
-                </li>
-                <li><a href="{% url 'home' %}">Accueil</a></li>
-                <li><a href="{% url 'profile' pk=user.pk %}">Profil</a></li>
-                <li class="nav-item">
-                    <form method="post" action="{% url 'logout' %}" class="nav-link">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger d-flex align-items-center">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </button>
-                    </form>
-                </li>                               
-            {% else %}
-                <li><a href="{% url 'login' %}">Se connecter</a></li>
+            <form method="get" action="{% url 'search_users' %}" class="search-form">
+                <input type="text" name="q" placeholder="Rechercher des personnes..." class="search-input" />
+            </form>
             {% endif %}
-        </ul>
+        </div>
+
+        <div class="nav-center">
+            <ul class="nav-links">
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'home' %}">Accueil</a></li>
+                    <li><a href="{% url 'profile' pk=user.pk %}">Profil</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Se connecter</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="nav-right">
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}" class="nav-link">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger d-flex align-items-center">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </form>
+            {% endif %}
+        </div>
     </header>    
 
     <!-- Contenu de la page -->

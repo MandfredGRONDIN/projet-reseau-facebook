@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
+<div class="create-story-container">
     <h1>Créer une Story</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Publier</button>
     </form>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/story_list.css' %}">
 {% endblock %}

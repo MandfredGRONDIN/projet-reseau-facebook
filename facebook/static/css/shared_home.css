@@ -1,162 +1,139 @@
-/* Styles généraux pour le body */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
-    /* Gris clair typique de Facebook */
-    margin: 0;
-    padding: 0;
-    color: #1c1e21;
-    /* Texte principal en noir doux */
-}
+/* --- Général --- */
 
-/* Container spécifique pour la home */
+/* Conteneur principal de la page */
 .home-container {
     display: flex;
     gap: 20px;
-    justify-content: space-between;
     padding: 20px;
 }
 
-/* Section des posts */
+/* Panneau de gauche */
 .left-panel {
-    width: 220px;
-    /* Fixe la largeur du panel gauche */
-    background-color: #ffffff;
-    padding: 20px;
+    flex: 1;
+    background-color: #f8f9fa;
     border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #ddd;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.middle-panel {
-    flex-grow: 1;
-    /* Prend toute la largeur restante */
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 900px;
-}
-
-h1 {
-    font-size: 26px;
-    color: #1877f2;
-    /* Bleu Facebook */
-    margin-bottom: 20px;
-}
-
-h2 {
-    font-size: 24px;
-    color: #1877f2;
-    /* Bleu Facebook */
+.left-panel h2 {
+    font-size: 18px;
     margin-bottom: 15px;
 }
 
-/* Conteneur des posts partagés */
-.shared-posts-container {
-    margin-top: 20px;
+.left-panel .btn {
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Post partagé individuel */
-.shared-post {
-    background-color: #ffffff;
-    padding: 15px;
+.left-panel .btn:hover {
+    background-color: #e9ecef;
+    color: #1877f2;
+}
+
+/* Panneau central */
+.middle-panel {
+    flex: 2;
+}
+
+/* --- Style pour le formulaire de création de post --- */
+
+.create-post {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
     border-radius: 8px;
     margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.shared-post p {
-    margin: 10px 0;
-    font-size: 16px;
-    color: #050505;
+.create-post h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
 }
 
-.shared-post strong {
-    color: #1877f2;
-    /* Bleu Facebook */
-    font-size: 16px;
+.create-post form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.shared-post img {
-    max-width: 100%;
-    border-radius: 8px;
-    margin-top: 10px;
+.create-post form p {
+    margin: 0;
 }
 
-.shared-post small {
-    font-size: 12px;
-    color: #777;
-    display: block;
-    margin-top: 10px;
+.create-post textarea {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    resize: none;
+    transition: border-color 0.3s;
 }
 
-/* Section des demandes d'amis */
+.create-post textarea:focus {
+    border-color: #1877f2;
+    outline: none;
+}
+
+.create-post button {
+    align-self: flex-end;
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.create-post button:hover {
+    background-color: #155db8;
+    cursor: pointer;
+}
+
+/* --- Panneau de droite --- */
 .right-panel {
-    width: 260px;
-    /* Augmenter la largeur de la colonne droite */
-    background-color: #ffffff;
-    padding: 20px;
+    flex: 1;
+    background-color: #f8f9fa;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 300px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .right-panel h2 {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 15px;
-    color: #1877f2;
 }
 
-
 .right-panel ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .right-panel ul li {
-    margin-bottom: 15px;
-    padding: 12px;
-    background-color: #f5f6f7;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-}
-
-.right-panel ul li p {
-    margin: 0;
+    margin-bottom: 10px;
     font-size: 14px;
-    font-weight: bold;
 }
 
-.right-panel form {
-    margin-top: 10px;
+.right-panel ul li a {
+    color: #1877f2;
+    text-decoration: none;
 }
 
-.right-panel form button {
-    width: auto;
-    margin-right: 10px;
+.right-panel ul li a:hover {
+    text-decoration: underline;
 }
 
-.btn {
-    width: 100%;
-    /* Les boutons occupent toute la largeur */
-    margin-top: 5px;
-}
-
-.right-panel .btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-}
-
-.right-panel .btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-
-.middle-panel {
-    min-width: 750px;
-}
-
-/* Responsivité pour petits écrans */
+/* --- Responsiveness --- */
 @media (max-width: 768px) {
     .home-container {
         flex-direction: column;
@@ -164,12 +141,12 @@ h2 {
     }
 
     .left-panel,
+    .middle-panel,
     .right-panel {
         width: 100%;
     }
 
-    .form-home button {
-        padding: 10px 15px;
-        font-size: 14px;
+    .create-post textarea {
+        height: 80px;
     }
 }

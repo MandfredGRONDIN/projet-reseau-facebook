@@ -1,85 +1,101 @@
-/* Style général pour la page de profil */
+/* === Container === */
 .profile-form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 30px;
-    background-color: #f9f9f9;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dee2e6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
 }
 
-/* Style du titre */
+/* === Header === */
 .profile-form-container h2 {
+    font-size: 1.8rem;
+    color: #343a40;
+    margin-bottom: 2rem;
     text-align: center;
-    color: #333;
-    margin-bottom: 20px;
 }
 
-/* Style pour les champs du formulaire */
-.profile-form-container form {
+/* === Form Styles === */
+form {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
 }
 
-.profile-form-container form input,
-.profile-form-container form select,
-.profile-form-container form button {
-    padding: 12px;
-    margin: 10px 0;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    transition: border-color 0.3s ease;
-}
-
-.profile-form-container form input:focus,
-.profile-form-container form select:focus,
-.profile-form-container form button:focus {
-    outline: none;
-    border-color: #1877f2;
-}
-
-/* Style pour les boutons */
-.profile-form-container form button {
-    background-color: #1877f2;
-    color: white;
+form button {
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    color: #ffffff;
     border: none;
+    border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
-    font-weight: bold;
     transition: background-color 0.3s ease;
+    width: 100%;
+    text-align: center;
 }
 
-.profile-form-container form button:hover {
-    background-color: #165eab;
+form button:hover {
+    background-color: #0056b3;
 }
 
-/* Style pour le bouton de suppression du profil */
-.delete-account-btn {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 12px;
-    margin: 20px 0 0;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    border-radius: 8px;
+/* === Delete Profile Button === */
+form .btn-danger {
+    background-color: #dc3545;
+    font-size: 1rem;
+    text-align: center;
 }
 
-.delete-account-btn:hover {
-    background-color: #d32f2f;
+form .btn-danger:hover {
+    background-color: #c82333;
 }
 
-/* Style des labels et erreurs */
-.profile-form-container label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #555;
+/* === Inputs and Textareas === */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+input[type="file"] {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    margin-bottom: 1rem;
+    width: 100%;
 }
 
-.profile-form-container .error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: -5px;
+input[type="file"] {
+    padding: 0.25rem;
+    font-size: 0.9rem;
+}
+
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+/* === Error Message Styling === */
+.form-error {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+}
+
+/* === Mobile Responsiveness === */
+@media (max-width: 768px) {
+    .profile-form-container {
+        padding: 1.5rem;
+    }
+
+    form button {
+        padding: 0.5rem 1rem;
+    }
+
+    .profile-form-container h2 {
+        font-size: 1.6rem;
+    }
 }

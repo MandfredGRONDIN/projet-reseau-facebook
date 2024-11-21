@@ -8,7 +8,7 @@ class CreateStoryView(CreateView):
     model = Story
     form_class = StoryForm
     template_name = 'create_story.html'
-    success_url = reverse_lazy('story_list') 
+    success_url = reverse_lazy('home') 
 
     def form_valid(self, form):
         form.instance.user = self.request.user

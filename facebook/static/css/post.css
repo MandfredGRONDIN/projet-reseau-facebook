@@ -1,70 +1,236 @@
-.profile-picture-min {
-    width: 50px;
-    height: 50px !important;
-    border-radius: 100%;
-    border: 3px solid #ddd;
-    object-fit: cover;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* --- Global Styles --- */
+
+/* Conteneur des posts */
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.post img {
-    max-width: 100%;
-    border-radius: 100%;
-    margin-top: 10px;
-}
-
-/* Section des commentaires */
-.comments-section {
-    background-color: #f8f9fa;
-    /* Clair, pour contraster avec le contenu principal */
+/* Style de chaque post */
+.post {
+    background-color: #fff !important;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px 15px;
-    margin-top: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Avatar des commentaires */
-.comment-avatar,
-.reply-avatar {
+/* Effet de survol pour chaque post */
+.post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Section du profil (image et nom) */
+.post .d-flex {
+    align-items: center;
+}
+
+.profile-picture-min,
+.profile-picture {
     width: 40px;
     height: 40px;
+    border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #e9ecef;
-    /* Bord clair */
 }
 
-/* Texte des commentaires */
-.comment-text,
-.reply-text {
-    font-size: 0.95rem;
-    line-height: 1.4;
+.profile-picture-min {
+    width: 30px;
+    height: 30px;
 }
 
-/* Auteur et texte supplémentaire */
-.comment-author,
-.reply-author {
-    font-weight: bold;
-    color: #0d6efd;
-    /* Couleur principale de Bootstrap */
+/* Contenu du post */
+.post p {
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
+    line-height: 1.5;
 }
 
-.comment-header small,
-.reply-author small {
-    color: #6c757d;
-    /* Texte secondaire */
+/* Style de l'image dans le post */
+.post img.img-fluid {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
 }
 
-/* Liste des réponses */
-.replies {
-    border-left: 2px solid #e9ecef;
-    padding-left: 10px;
+/* --- Post Reactions --- */
+
+/* Conteneur principal des réactions */
+.post-reactions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
 }
 
-/* Bouton et textarea */
-.add-comment-form textarea {
+/* Bouton Réagir */
+.reaction-btn {
+    font-size: 14px;
+    padding: 6px 12px;
     border-radius: 20px;
-    resize: none;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.add-comment-form .btn {
-    float: right;
+.reaction-btn:hover {
+    background-color: #e9ecef;
+    color: #1877f2;
+    border-color: #1877f2;
+}
+
+/* Conteneur des options de réaction */
+.reaction-options {
+    margin-top: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    width: 250px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Liste des réactions */
+.reaction-options .list-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Item de réaction */
+.reaction-options .list-group-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    border: none;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.reaction-options .list-group-item:hover {
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+
+/* Icônes de réaction */
+.reaction-options .list-group-item i {
+    font-size: 18px;
+    margin-right: 8px;
+    color: #666;
+}
+
+.reaction-options .list-group-item input {
+    margin-right: 10px;
+}
+
+/* Bouton d'envoi de réaction */
+.reaction-options button[type="submit"] {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #1877f2;
+    border-color: #1877f2;
+    color: white;
+    padding: 8px;
+    border-radius: 20px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.reaction-options button[type="submit"]:hover {
+    background-color: #155db8;
+    border-color: #155db8;
+}
+
+/* --- Post Actions --- */
+
+/* Actions du post (commenter, partager) */
+.post-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+/* Boutons d'action */
+.btn-light {
+    background-color: #f1f3f5;
+    border: 1px solid #ddd;
+    color: #333;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+.btn-light:hover {
+    background-color: #e9ecef;
+}
+
+/* --- Comment Section --- */
+
+/* Section des commentaires (initialement cachée) */
+.comment-section {
+    display: none;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.comment-section .comment {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    padding: 5px 0;
+}
+
+.comment-section .comment .comment-profile-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Textes dans la section des commentaires */
+.comment-section p {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+}
+
+.comment-section .comment .comment-content {
+    flex: 1;
+}
+
+.comment-section .comment .comment-actions {
+    font-size: 12px;
+    color: #888;
+}
+
+/* --- Responsiveness --- */
+
+@media (max-width: 768px) {
+
+    .profile-picture-min,
+    .profile-picture {
+        width: 35px;
+        height: 35px;
+    }
+
+    .post img.img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .post-actions {
+        flex-direction: column;
+    }
+
+    .btn-light {
+        width: 100%;
+        text-align: center;
+    }
+
+    .reaction-options {
+        width: 100%;
+    }
 }

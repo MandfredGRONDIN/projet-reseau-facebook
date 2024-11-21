@@ -1,190 +1,140 @@
-/* Styles généraux pour le body */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
-    /* Gris clair typique de Facebook */
-    margin: 0;
-    padding: 0;
-    color: #1c1e21;
-    /* Texte principal en noir doux */
-}
+/* --- Général --- */
 
-/* Container spécifique pour la home */
+/* Conteneur principal de la page */
 .home-container {
     display: flex;
     gap: 20px;
-    justify-content: space-between;
     padding: 20px;
 }
 
-/* Section des posts */
+/* Panneau de gauche */
 .left-panel {
-    width: 220px;
-    /* Fixe la largeur du panel gauche */
-    background-color: #ffffff;
-    padding: 20px;
+    flex: 1;
+    background-color: #f8f9fa;
     border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #ddd;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.middle-panel {
-    flex-grow: 1;
-    /* Prend toute la largeur restante */
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 900px;
-}
-
-h2 {
-    font-size: 24px;
-    color: #1877f2;
-    /* Bleu Facebook */
+.left-panel h2 {
+    font-size: 18px;
     margin-bottom: 15px;
 }
 
-/* Formulaire de création de post */
-.form-home {
-    background-color: #f5f6f7;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-.form-home textarea,
-.form-home input[type="url"] {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+.left-panel .btn {
     font-size: 14px;
-    background-color: #fff;
-    resize: vertical;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.form-home button {
-    padding: 12px 20px;
-    background-color: #1877f2;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.form-home button:hover {
-    background-color: #145dbf;
-}
-
-/* Conteneur des posts */
-.posts-container {
-    margin-top: 20px;
-}
-
-/* Post individuel */
-.post {
-    background-color: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.post p {
-    margin: 10px 0;
-    font-size: 16px;
-    color: #050505;
-}
-
-.post strong {
+.left-panel .btn:hover {
+    background-color: #e9ecef;
     color: #1877f2;
-    /* Bleu Facebook */
-    font-size: 16px;
 }
 
-.post img {
-    max-width: 100%;
-    border-radius: 8px;
-    margin-top: 10px;
+/* Panneau central */
+.middle-panel {
+    flex: 2;
 }
 
-.post small {
-    font-size: 12px;
-    color: #777;
-    display: block;
-    margin-top: 10px;
-}
+/* --- Style pour le formulaire de création de post --- */
 
-/* Section des demandes d'amis */
-.right-panel {
-    width: 260px;
-    /* Augmenter la largeur de la colonne droite */
-    background-color: #ffffff;
+.create-post {
+    background-color: #fff;
     padding: 20px;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 300px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.create-post h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.create-post form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.create-post form p {
+    margin: 0;
+}
+
+.create-post textarea {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    resize: none;
+    transition: border-color 0.3s;
+}
+
+.create-post textarea:focus {
+    border-color: #1877f2;
+    outline: none;
+}
+
+.create-post button {
+    align-self: flex-end;
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.create-post button:hover {
+    background-color: #155db8;
+    cursor: pointer;
+}
+
+/* --- Panneau de droite --- */
+.right-panel {
+    flex: 1;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .right-panel h2 {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 15px;
-    color: #1877f2;
 }
 
 .right-panel ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .right-panel ul li {
-    margin-bottom: 15px;
-    padding: 12px;
-    background-color: #f5f6f7;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-}
-
-.right-panel ul li p {
-    margin: 0;
+    margin-bottom: 10px;
     font-size: 14px;
-    font-weight: bold;
 }
 
-.right-panel form {
-    margin-top: 10px;
+.right-panel ul li a {
+    color: #1877f2;
+    text-decoration: none;
 }
 
-.right-panel form button {
-    width: auto;
-    margin-right: 10px;
+.right-panel ul li a:hover {
+    text-decoration: underline;
 }
 
-.btn {
-    width: 100%;
-    /* Boutons occupent toute la largeur de leur conteneur */
-    margin-top: 5px;
-}
-
-.right-panel .btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-}
-
-.right-panel .btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-
-.middle-panel {
-    min-width: 750px;
-}
-
-/* Responsivité pour petits écrans */
+/* --- Responsiveness --- */
 @media (max-width: 768px) {
     .home-container {
         flex-direction: column;
@@ -192,89 +142,12 @@ h2 {
     }
 
     .left-panel,
+    .middle-panel,
     .right-panel {
         width: 100%;
     }
 
-    .form-home button {
-        padding: 10px 15px;
-        font-size: 14px;
+    .create-post textarea {
+        height: 80px;
     }
-}
-
-/* Styles pour la section des stories */
-.stories-panel {
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.stories-container {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.stories-wrapper {
-    display: flex;
-    gap: 15px;
-}
-
-.story {
-    width: 100px;
-    text-align: center;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.story img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-.story p {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #555;
-}
-
-.create-story {
-    margin-top: 30px;
-}
-
-.create-story h3 {
-    font-size: 20px;
-    color: #1877f2;
-}
-
-.create-story form {
-    margin-top: 15px;
-}
-
-.create-story input[type="url"],
-.create-story input[type="datetime-local"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-}
-
-.create-story button {
-    background-color: #1877f2;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 6px;
-    border: none;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.create-story button:hover {
-    background-color: #145dbf;
 }

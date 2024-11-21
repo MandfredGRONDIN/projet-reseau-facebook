@@ -5,53 +5,38 @@
     padding: 10px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    /* Permet de faire défiler horizontalement les stories */
 }
 
 /* Chaque story */
 .story-item {
     position: relative;
     width: 120px;
-    /* Taille par défaut de chaque story */
     min-width: 120px;
-    /* Largeur minimale */
     height: 180px;
-    /* Hauteur de chaque story */
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     cursor: pointer;
-    transition: none;
-    /* Supprime l'effet de transition */
     flex-shrink: 0;
-    /* Empêche les stories de se rétrécir lorsque l'espace est limité */
 }
 
 /* Retirer l'effet de survol */
 .story-item:hover {
-    transform: none;
-    /* Désactive l'effet de grossissement */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    /* Effet d'ombre léger au survol */
 }
 
-/* Image de la story (ajustée pour ne pas être déformée) */
+/* Image de la story */
 .story-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Garder une proportion correcte sans déformation */
     border-radius: 8px;
-    /* Coins arrondis */
-    transition: none;
-    /* Evite tout effet de transition de taille */
 }
 
-/* Informations de la story (Nom d'utilisateur et expiration) */
+/* Informations de la story */
 .story-info {
     background: rgba(0, 0, 0, 0.5);
-    /* Fond sombre semi-transparent */
     color: white;
     font-size: 14px;
     font-weight: bold;
@@ -64,7 +49,7 @@
     text-align: center;
 }
 
-/* Texte du titre (si pas de stories disponibles) */
+/* Texte si aucune story n'est disponible */
 .text-center {
     font-size: 16px;
     color: #555;
@@ -85,33 +70,24 @@
     background: #f0f2f5;
 }
 
-/* Story Image pour le carousel (mise à jour pour le carousel si nécessaire) */
-.story-img {
-    height: 400px;
-    /* Vous pouvez ajuster la hauteur selon vos besoins */
-    object-fit: cover;
-    border-radius: 8px;
-    /* Coins arrondis */
-}
+/* ===================
+   Styles du carousel
+   =================== */
 
-/* Ajout de styles aux éléments du carousel */
 .carousel-item {
     position: relative;
 }
 
-/* Définir la taille et la position de la légende */
 .carousel-caption {
     position: absolute;
     bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.5);
-    /* Fond sombre semi-transparent */
     padding: 10px;
     border-radius: 8px;
 }
 
-/* Mettre le texte en gras et améliorer la lisibilité */
 .carousel-caption p {
     font-weight: bold;
     margin: 0;
@@ -120,7 +96,6 @@
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-color: rgba(0, 0, 0, 0.5);
-    /* Icônes de contrôle avec fond sombre */
     border-radius: 50%;
 }
 
@@ -134,10 +109,89 @@
     height: 100%;
 }
 
-/* Réduire la taille du carousel sur les petits écrans */
+/* Responsivité pour petits écrans */
 @media (max-width: 768px) {
     .story-img {
         height: 250px;
-        /* Image plus petite sur petits écrans */
+    }
+}
+
+/* Global container for the create story page */
+.create-story-container {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Header styling */
+.create-story-container h1 {
+    font-size: 2rem;
+    color: #343a40;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Form styling */
+.create-story-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.create-story-container form label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.create-story-container form input,
+.create-story-container form textarea,
+.create-story-container form select {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    transition: border-color 0.3s ease;
+}
+
+.create-story-container form input:focus,
+.create-story-container form textarea:focus,
+.create-story-container form select:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #ffffff;
+}
+
+/* Button styling */
+.create-story-container form .btn {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center;
+}
+
+.create-story-container form .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .create-story-container {
+        padding: 1.5rem;
+    }
+
+    .create-story-container h1 {
+        font-size: 1.8rem;
     }
 }

@@ -14,7 +14,7 @@
 
     <form method="post" action="{% url 'delete_profile' %}">
       {% csrf_token %}
-      <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?')">
+      <button type="submit" class="btn btn-danger mt-2" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?')">
         Supprimer mon profil
       </button>
   </form>
@@ -23,5 +23,5 @@
 {% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+  <link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
 {% endblock %}

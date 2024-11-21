@@ -1,63 +1,146 @@
-/* Styles généraux pour le body */
+/* =====================
+   Styles de base
+   ===================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f0f2f5;
-    margin: 0;
-    padding: 0;
+    color: #1c1e21;
 }
 
-/* Header styles */
-.header {
+/* Liens */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+    margin-bottom: 0;
+}
+
+/* =====================
+   En-tête (Header)
+   ===================== */
+
+header {
     background-color: #1877f2;
-    padding: 10px 0;
-    text-align: center;
+    /* Bleu de Facebook */
     color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.header .logo {
-    font-size: 30px;
-    font-weight: 700;
-    color: #fff;
+/* Section gauche (barre de recherche) */
+.nav-left {
+    flex: 1;
 }
 
-.header .nav-links {
-    margin-top: 10px;
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    /* Garder cette position pour le bon alignement du champ */
+}
+
+.search-form .search-input {
+    padding: 8px;
+    border: none;
+    border-radius: 20px;
+    width: 250px;
+    font-size: 16px;
+}
+
+/* Section centrale (liens Accueil et Profil) */
+.nav-center {
+    flex: 2;
     display: flex;
     justify-content: center;
-    list-style-type: none;
-    padding: 0;
-    align-items: center;
-    align-content: center;
 }
 
-.header .nav-links li {
-    margin: 0 15px;
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
 }
 
-.header .nav-links a {
+.nav-links li {
+    display: inline-block;
+}
+
+.nav-links a {
     color: white;
-    text-decoration: none;
-    font-size: 14px;
+    font-size: 16px;
 }
 
-.header .nav-links a:hover {
-    text-decoration: underline;
+/* Section droite (déconnexion) */
+.nav-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
 }
 
-/* Footer styles */
-.footer {
-    background-color: #f0f2f5;
-    padding: 10px;
+/* =====================
+   Contenu Principal (Main Content)
+   ===================== */
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* =====================
+   Pied de page (Footer)
+   ===================== */
+
+footer {
+    background-color: #f1f2f6;
     text-align: center;
-    margin-top: 20px;
-    font-size: 12px;
+    padding: 10px;
+    font-size: 14px;
+    color: #606770;
 }
 
-.footer a {
-    color: #1877f2;
-    text-decoration: none;
-}
+/* =====================
+   Responsivité pour mobile
+   ===================== */
 
-.footer a:hover {
-    text-decoration: underline;
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-left {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .nav-center {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .nav-right {
+        width: 100%;
+        text-align: right;
+    }
+
+    .home-page {
+        grid-template-columns: 1fr;
+    }
 }

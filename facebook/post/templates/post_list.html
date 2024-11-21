@@ -1,4 +1,3 @@
-
 {% load static %}
 <div class="container mt-4">
     <div class="posts-container">
@@ -6,10 +5,8 @@
             <div class="post mb-4 p-4 border rounded shadow-sm" id="post-{{ post.id }}">
                 <div class="d-flex align-items-center mb-2">
                     {% if post.user.profile.profile_picture %}
-                        <!-- Affiche l'image de profil si elle existe -->
                         <img src="{{ post.user.profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture-min">
                     {% else %}
-                        <!-- Affiche une image par défaut si l'image de profil n'existe pas -->
                         <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" alt="Default Profile Picture" class="profile-picture">
                     {% endif %}
                     <div class="ms-2">
@@ -25,12 +22,12 @@
                 {% endif %}
                 
                 <p class="text-muted"><small>{{ post.created_at }}</small></p>
+                
                 <div class="post-reactions">
                     {% for reaction_data in reactions_count %}
                         {% if reaction_data.post_id == post.id %}
                             {% for reaction in reaction_data.reactions %}
                                 <span class="reaction-item">
-                                    <!-- Affichage de l'icône selon le type de réaction -->
                                     {{ reaction.count }}
                                     {% if reaction.type == 'like' %}
                                         <i class="fas fa-thumbs-up"></i>
@@ -63,6 +60,7 @@
                         </button>
                     </form>
                 </div>
+                
                 {% include 'post_comments.html' with post=post form=form %}
             </div>
         {% empty %}
@@ -71,21 +69,17 @@
     </div>
 </div>
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/post.css' %}">
-{% endblock %}
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const commentButtons = document.querySelectorAll('.comment-btn');
         const reactionButtons = document.querySelectorAll('.reaction-btn');
-
+        
         // Gestion de l'affichage des commentaires
         commentButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const postId = button.getAttribute('data-post-id');
                 const commentSection = document.getElementById(`comments-section-${postId}`);
-
+                
                 // Toggle entre afficher/masquer la section des commentaires
                 commentSection.style.display = commentSection.style.display === 'none' || commentSection.style.display === '' ? 'block' : 'none';
             });
@@ -101,7 +95,7 @@
                 reactionOptions.style.display = reactionOptions.style.display === 'none' || reactionOptions.style.display === '' ? 'block' : 'none';
             });
         });
-
+        
         // Gestion des soumissions de réaction via AJAX
         const reactionForms = document.querySelectorAll('.reaction-form');
         reactionForms.forEach(form => {
@@ -121,10 +115,15 @@
                 .then(response => response.json())
                 .then(data => {
                     location.reload();
-
+                    
                 })
                 .catch(error => console.error('Erreur:', error));
             });
         });
     });
-</script>
+    </script>
+
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/post.css' %}">
+{% endblock %}
