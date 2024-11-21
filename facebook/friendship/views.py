@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from .models import Friendship
 from django.views.generic import View
+from share.models import Share
    
 class UserSearchView(LoginRequiredMixin, ListView):
     model = User
@@ -63,15 +64,22 @@ class RespondToFriendRequestView(LoginRequiredMixin, RedirectView):
     
 class RemoveFriendView(LoginRequiredMixin, View):
     def post(self, request, pk):
+        # Récupérer l'utilisateur (ami) à supprimer
         user2 = get_object_or_404(User, pk=pk)
 
+        # Trouver les relations d'amitié entre les deux utilisateurs
         friendships = Friendship.objects.filter(
-            user1=request.user, user2=user2
-        ) | Friendship.objects.filter(
-            user1=user2, user2=request.user
+            (Q(user1=request.user) & Q(user2=user2)) |
+            (Q(user1=user2) & Q(user2=request.user))
         )
 
+        # Si la relation d'amitié existe, la supprimer
         if friendships.exists():
-            friendships.delete() 
-
-        return redirect('home') 
+            friendships.delete()
+            
+            shares_to_delete = Share.objects.filter(
+                Q(user=request.user) & Q(post__user=user2)
+            )
+            shares_to_delete.delete()
+        
+        return redirect('home')
